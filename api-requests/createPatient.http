@@ -1,0 +1,13 @@
+### POST request to create Patient
+POST http://localhost:4000/patients
+Content-Type: application/json
+
+{
+  "name": "Avinash K Gautam",
+  "email": "avinash1904@gmail.com",
+  "address":"Magarpatta,Pune",
+  "dateOfBirth": "2002-04-19",
+  "gender": "Male",
+  "registeredDate": "2026-03-08"
+}
+###

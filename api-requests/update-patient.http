@@ -1,0 +1,13 @@
+### UPDATE Existing Patient
+PUT http://localhost:4000/patients/e42c2dc5-6bf5-4185-b026-fcf20a195ccd
+Content-Type: application/json
+
+{
+  "name": "Avinash Gautam",
+  "email": "isabellabar.walker@example.com",
+  "address":"Magarpatta City, Hadapsar, Pune",
+  "dateOfBirth": "2002-04-19",
+  "gender": "Male"
+}
+
+###
