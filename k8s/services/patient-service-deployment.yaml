@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: patient-service
+  namespace: patient-management
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: patient-service
+  template:
+    metadata:
+      labels:
+        app: patient-service
+    spec:
+      containers:
+        - name: patient-service
+          image: avinash190420/patient-service
+          ports:
+            - containerPort: 4000
+          env:
+            - name: SPRING_DATASOURCE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: pm-config
+                  key: PATIENT_DATASOURCE_URL
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: pm-secrets
+                  key: POSTGRES_USER
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pm-secrets
+                  key: POSTGRES_PASSWORD
+            - name: SPRING_JPA_HIBERNATE_DDL_AUTO
+              valueFrom:
+                configMapKeyRef:
+                  name: pm-config
+                  key: SPRING_JPA_HIBERNATE_DDL_AUTO
+            - name: SPRING_SQL_INIT_MODE
+              valueFrom:
+                configMapKeyRef:
+                  name: pm-config
+                  key: SPRING_SQL_INIT_MODE
+            - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+              valueFrom:
+                configMapKeyRef:
+                  name: pm-config
+                  key: SPRING_KAFKA_BOOTSTRAP_SERVERS
+            - name: BILLING_SERVICE_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  name: pm-config
+                  key: BILLING_SERVICE_ADDRESS
+            - name: BILLING_SERVICE_GRPC_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: pm-config
+                  key: BILLING_SERVICE_GRPC_PORT
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"

@@ -1,4 +1,6 @@
 ### GET request to get all patients
-GET http://localhost:4004/api/patients
+
+### provide the url you will get on starting api-gateway service http://127.0.0.1:2487
+GET http://127.0.0.1:2487/api/patients
 Authorization: Bearer {{token}}
 ###
